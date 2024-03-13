@@ -160,17 +160,13 @@ local plugins = {
 
   -- UI
   {
-    'ellisonleao/gruvbox.nvim',
+    'neanias/everforest-nvim',
     lazy = false,
-    opts = function(_, _)
-      require('plugins.configs.gruvbox')
+    config = function()
+      require("everforest").setup({
+        background = "medium"
+      })
     end,
-    config = function(_, opts)
-      require('gruvbox').setup(opts)
-    end,
-    dependencies = {
-      'catppuccin/nvim'
-    }
   },
 
   {
@@ -182,10 +178,6 @@ local plugins = {
     config = function(_, opts)
       require('lualine').setup(opts)
     end,
-    dependencies = {
-      'catppuccin/nvim',
-      'ellisonleao/gruvbox.nvim'
-    }
   },
 
   {

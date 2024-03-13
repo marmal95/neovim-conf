@@ -1,7 +1,7 @@
 local icons = require('ui.icons')
 local ui_theme = require('ui.theme')
-local theme = ui_theme.lualine_theme_config
-local colors = ui_theme.palette
+local colors = require('ui.colors')
+local theme = ui_theme.lualine_theme
 
 local opts = {
   separator = { left = '', right = '' },
@@ -25,7 +25,7 @@ local mode = {
 
 local filename = {
   'filename',
-  color = { bg = colors.sapphire, fg = "#242735" },
+  color = { bg = colors.blue, fg = "#242735" },
   separator = opts.separator,
 }
 
@@ -33,7 +33,7 @@ local filetype = {
   "filetype",
   icon_only = true,
   colored = true,
-  color = { bg = colors.surface0 },
+  color = { bg = colors.bg1 },
   separator = opts.separator,
 }
 
@@ -43,15 +43,15 @@ local branch = {
   separator = opts.separator,
 }
 
-local diff = {
-  "diff",
-  color = { bg = colors.surface0, fg = colors.text },
-  separator = opts.separator,
-}
+-- local diff = {
+--   "diff",
+--   color = { bg = colors.surface0, fg = colors.text },
+--   separator = opts.separator,
+-- }
 
 local location = {
   'location',
-  color = { bg = colors.surface0, fg = colors.text },
+  color = { bg = colors.bg1, fg = colors.statusline2 },
   separator = opts.separator,
 }
 
@@ -63,13 +63,13 @@ local progress = {
 
 local encoding = {
   'encoding',
-  color = { bg = colors.surface0, fg = colors.text },
+  color = { bg = colors.bg1, fg = colors.statusline2 },
   separator = opts.separator,
 }
 
 local fileformat = {
   'fileformat',
-  color = { bg = colors.peach, fg = colors.base },
+  color = { bg = colors.orange, fg = colors.bg0 },
   separator = opts.separator,
 }
 
@@ -80,8 +80,8 @@ local tabs = {
   separator = opts.separator,
   section_separators = { left = opts.separator.right, right = opts.separator.left },
   tabs_color = {
-    active = { bg = colors.sapphire, fg = colors.base },
-    inactive = { bg = colors.surface0, fg = colors.text }
+    active = { bg = colors.blue, fg = colors.bg0 },
+    inactive = { bg = colors.bg2, fg = colors.grey2 }
   },
 }
 
