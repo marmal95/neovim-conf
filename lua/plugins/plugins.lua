@@ -60,6 +60,7 @@ local plugins = {
 
   {
     'numToStr/Comment.nvim',
+    -- Keys triggering plugin lazy loading. Actual mapping done by defaults in `setup {}`
     keys = {
       { "gcc", mode = "n",          desc = "Comment toggle current line" },
       { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
@@ -71,7 +72,6 @@ local plugins = {
     config = function() require('Comment').setup {} end
   },
 
-  -- lazy
   {
     "sontungexpt/stcursorword",
     event = "VeryLazy",
@@ -82,7 +82,7 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     lazy = false,
-    -- cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
       return require "plugins.configs.mason"
     end,
