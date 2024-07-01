@@ -16,7 +16,7 @@ local plugins = {
   },
 
   {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeFindFile", "NvimTreeToggle" },
     opts = function()
       return require "plugins.configs.nvim-tree"
@@ -164,7 +164,11 @@ local plugins = {
     lazy = false,
     config = function()
       require("everforest").setup({
-        background = "medium"
+        background = "medium",
+        italics = true,
+        -- Hack: Set to unsupported value (-1)
+        -- Prevents setting Transparency and changing colors change by theme on its own
+        transparent_background_level = -1
       })
     end,
   },
@@ -187,7 +191,7 @@ local plugins = {
   },
 
   {
-    'kyazdani42/nvim-web-devicons'
+    'nvim-tree/nvim-web-devicons'
   }
 }
 

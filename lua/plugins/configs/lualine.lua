@@ -1,7 +1,7 @@
 local icons = require('ui.icons')
 local ui_theme = require('ui.theme')
-local colors = require('ui.colors')
 local theme = ui_theme.lualine_theme
+local colors = ui_theme.colors
 
 local opts = {
   separator = { left = '', right = '' },
@@ -14,7 +14,7 @@ local space = {
   function()
     return " "
   end,
-  color = { bg = theme.normal.c.bg, fg = "#80A7EA" },
+  color = { bg = theme.normal.c.bg, fg = "" },
 }
 
 local mode = {
@@ -25,7 +25,7 @@ local mode = {
 
 local filename = {
   'filename',
-  color = { bg = colors.blue, fg = "#242735" },
+  color = { bg = colors.blue, fg = colors.bg_dim },
   separator = opts.separator,
 }
 
@@ -39,15 +39,15 @@ local filetype = {
 
 local branch = {
   'branch',
-  color = { bg = colors.green, fg = "#313244" },
+  color = { bg = colors.green, fg = colors.bg_dim },
   separator = opts.separator,
 }
 
--- local diff = {
---   "diff",
---   color = { bg = colors.surface0, fg = colors.text },
---   separator = opts.separator,
--- }
+local diff = {
+  "diff",
+  color = { bg = colors.bg1, fg = colors.text },
+  separator = opts.separator,
+}
 
 local location = {
   'location',
@@ -57,7 +57,7 @@ local location = {
 
 local progress = {
   'progress',
-  color = { bg = colors.yellow, fg = "#242735" },
+  color = { bg = colors.yellow, fg = colors.bg_dim },
   separator = opts.separator,
 }
 
@@ -103,7 +103,7 @@ end
 
 local diagnostics = {
   'diagnostics',
-  color = { bg = "#313244", fg = "#80A7EA" },
+  color = { bg = colors.bg1, fg = "" },
   separator = opts.separator,
   symbols = {
     error = icons.diagnostics.Error .. ' ',
@@ -118,7 +118,7 @@ local lsp = {
     return getLspName()
   end,
   separator = { left = opts.separator.left },
-  color = { bg = colors.red, fg = "#1e1e2e" },
+  color = { bg = colors.red, fg = colors.bg_dim },
 }
 
 

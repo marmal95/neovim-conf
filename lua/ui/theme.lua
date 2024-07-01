@@ -1,13 +1,12 @@
 local M = {}
 
-local colors = require('ui.colors')
-
 M.configure = function()
   vim.cmd("colorscheme " .. M.theme)
 end
 
 local function load_everforest()
   local lualine_theme = require('lualine.themes.everforest')
+  local colors = require('ui.colors').everforest
 
   lualine_theme.normal.c.bg = colors.bg0
   lualine_theme.insert.c.bg = colors.bg0
@@ -19,6 +18,7 @@ local function load_everforest()
 
   M.lualine_theme = lualine_theme
   M.theme = 'everforest'
+  M.colors = colors
 end
 
 load_everforest()
