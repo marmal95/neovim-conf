@@ -11,7 +11,7 @@ Leader key - by default is set to <kbd>\\</kbd>
 <kbd>Control + /h/j/k/l</kbd> - panes navigation  
 <kbd>Control + e/q</kbd> - tabs left/right navigation  
 
-### Telescope - fuzzy finder
+### FZF - fuzzy finder
 <i>Leader</i> - <kbd>f</kbd> - open file searcher  
 <i>Leader</i> - <kbd>b</kbd> - open active buffers searcher  
 <i>Leader</i> - <kbd>g</kbd> - open grep window  

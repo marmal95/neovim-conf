@@ -38,14 +38,16 @@ M.general = {
   }
 }
 
-M.telescope = {
+M.fzf = {
   n = {
-    ["<leader>f"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Browse buffers" },
-    ["<leader>g"] = { "<cmd> Telescope live_grep <CR>", "Grep files" },
-    ["<leader>s"] = { "<cmd> Telescope grep_string <CR>", "Grep string" },
-    ["<leader>cg"] = { "<cmd> :Telescope live_grep glob_pattern=!tests glob_pattern=!test <CR>",
-      "Grep files exluding test" },
+    ["<leader>f"] = { "<cmd> FzfLua files <CR>", "Find files" },
+    ["<leader>r"] = { "<cmd> FzfLua resume <CR>", "Resume find/grep" },
+    ["<leader>b"] = { "<cmd> FzfLua buffers <CR>", "Browse buffers" },
+    ["<leader>g"] = { "<cmd> FzfLua live_grep_glob <CR>", "Grep files" },
+    ["<leader>s"] = { "<cmd> FzfLua grep_cword <CR>", "Grep cursor word" },
+  },
+  v = {
+    ["<leader>g"] = { "<cmd> FzfLua grep_visual <CR>", "Grep visual" },
   }
 }
 

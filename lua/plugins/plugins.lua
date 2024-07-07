@@ -1,18 +1,18 @@
 local plugins = {
   -- Navigation
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    cmd = "Telescope",
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "FzfLua",
     init = function()
-      require('core.utils').load_mappings('telescope')
+      require('core.utils').load_mappings('fzf')
     end,
     opts = function()
-      return require "plugins.configs.telescope"
+      return require "plugins.configs.fzf"
     end,
     config = function(_, opts)
-      require('telescope').setup(opts)
-    end,
+      require("fzf-lua").setup(opts)
+    end
   },
 
   {
