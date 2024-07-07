@@ -17,10 +17,32 @@ local function load_everforest()
   lualine_theme.terminal.c.bg = colors.bg0
 
   M.lualine_theme = lualine_theme
+  M.lualine_preset = 'everforest'
   M.theme = 'everforest'
-  M.colors = colors
+end
+
+local function load_catppuccin()
+  local lualine_theme = require('lualine.themes.catppuccin-frappe')
+  local colors = require('ui.colors').catppuccin_frappe
+
+  lualine_theme.normal.c.bg = colors.base
+  M.lualine_theme = lualine_theme
+  M.lualine_preset = 'catppuccin_frappe'
+  M.theme = 'catppuccin-frappe'
+end
+
+local function load_nord()
+  local lualine_theme = require('lualine.themes.nord')
+  local colors = require('ui.colors').nord
+
+  lualine_theme.normal.c.bg = colors.black
+  M.lualine_theme = lualine_theme
+  M.lualine_preset = 'nord'
+  M.theme = 'nord'
 end
 
 load_everforest()
+-- load_catppuccin()
+-- load_nord()
 
 return M

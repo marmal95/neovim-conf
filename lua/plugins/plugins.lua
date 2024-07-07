@@ -174,6 +174,17 @@ local plugins = {
   },
 
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+  },
+
+  {
+    "shaunsingh/nord.nvim",
+    lazy = false
+  },
+
+  {
     'nvim-lualine/lualine.nvim',
     lazy = false,
     opts = function()

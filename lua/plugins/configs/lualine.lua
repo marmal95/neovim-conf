@@ -1,7 +1,66 @@
 local icons = require('ui.icons')
 local ui_theme = require('ui.theme')
+local colors = require('ui.colors')
 local theme = ui_theme.lualine_theme
-local colors = ui_theme.colors
+
+local lualine_presets = {
+  everforest = {
+    space = { bg = theme.normal.c.bg, fg = "" },
+    filename = { bg = colors.everforest.blue, fg = colors.everforest.bg_dim },
+    filetype = { bg = colors.everforest.bg1 },
+    branch = { bg = colors.everforest.green, fg = colors.everforest.bg_dim },
+    diff = { bg = colors.everforest.bg1, fg = colors.everforest.text },
+    location = { bg = colors.everforest.bg1, fg = colors.everforest.statusline2 },
+    progress = { bg = colors.everforest.yellow, fg = colors.everforest.bg_dim },
+    encoding = { bg = colors.everforest.bg1, fg = colors.everforest.statusline2 },
+    fileformat = { bg = colors.everforest.orange, fg = colors.everforest.bg0 },
+    tabs_color = {
+      active = { bg = colors.everforest.blue, fg = colors.everforest.bg0 },
+      inactive = { bg = colors.everforest.bg2, fg = colors.everforest.grey2 }
+    },
+    diagnostics = { bg = colors.everforest.bg1, fg = "" },
+    lsp = { bg = colors.everforest.red, fg = colors.everforest.bg_dim },
+  },
+
+  catppuccin_frappe = {
+    space = { bg = theme.normal.c.bg, fg = "" },
+    filename = { bg = colors.catppuccin_frappe.sapphire, fg = colors.catppuccin_frappe.base },
+    filetype = { bg = colors.catppuccin_frappe.surface0 },
+    branch = { bg = colors.catppuccin_frappe.green, fg = colors.catppuccin_frappe.base },
+    diff = { bg = colors.catppuccin_frappe.surface0, fg = colors.catppuccin_frappe.text },
+    location = { bg = colors.catppuccin_frappe.surface0, fg = colors.catppuccin_frappe.text },
+    progress = { bg = colors.catppuccin_frappe.yellow, fg = colors.catppuccin_frappe.base },
+    encoding = { bg = colors.catppuccin_frappe.surface0, fg = colors.catppuccin_frappe.text },
+    fileformat = { bg = colors.catppuccin_frappe.peach, fg = colors.catppuccin_frappe.base },
+    tabs_color = {
+      active = { bg = colors.catppuccin_frappe.blue, fg = colors.catppuccin_frappe.base },
+      inactive = { bg = colors.catppuccin_frappe.surface0, fg = colors.catppuccin_frappe.blue }
+    },
+    diagnostics = { bg = colors.catppuccin_frappe.surface0, fg = "" },
+    lsp = { bg = colors.catppuccin_frappe.red, fg = colors.catppuccin_frappe.base },
+  },
+
+  nord = {
+    space = { bg = theme.normal.c.bg, fg = "" },
+    filename = { bg = colors.nord.off_blue, fg = colors.nord.black },
+    filetype = { bg = colors.nord.dark_gray },
+    branch = { bg = colors.nord.green, fg = colors.nord.black },
+    diff = { bg = colors.nord.dark_gray, fg = "" },
+    location = { bg = colors.nord.dark_gray, fg = colors.nord.darkest_white },
+    progress = { bg = colors.nord.yellow, fg = colors.nord.black },
+    encoding = { bg = colors.nord.dark_gray, fg = colors.nord.darkest_white },
+    fileformat = { bg = colors.nord.orange, fg = colors.nord.black },
+    tabs_color = {
+      active = { bg = colors.nord.off_blue, fg = colors.nord.black },
+      inactive = { bg = colors.nord.dark_gray, fg = colors.nord.glacier }
+    },
+    diagnostics = { bg = colors.nord.dark_gray, fg = "" },
+    lsp = { bg = colors.nord.red, fg = colors.nord.black },
+  }
+}
+
+local palette = lualine_presets[ui_theme.lualine_preset]
+
 
 local opts = {
   separator = { left = '', right = '' },
@@ -14,7 +73,7 @@ local space = {
   function()
     return " "
   end,
-  color = { bg = theme.normal.c.bg, fg = "" },
+  color = palette.space,
 }
 
 local mode = {
@@ -25,7 +84,7 @@ local mode = {
 
 local filename = {
   'filename',
-  color = { bg = colors.blue, fg = colors.bg_dim },
+  color = palette.filename,
   separator = opts.separator,
 }
 
@@ -33,43 +92,43 @@ local filetype = {
   "filetype",
   icon_only = true,
   colored = true,
-  color = { bg = colors.bg1 },
+  color = palette.filetype,
   separator = opts.separator,
 }
 
 local branch = {
   'branch',
-  color = { bg = colors.green, fg = colors.bg_dim },
+  color = palette.branch,
   separator = opts.separator,
 }
 
 local diff = {
   "diff",
-  color = { bg = colors.bg1, fg = colors.text },
+  color = palette.diff,
   separator = opts.separator,
 }
 
 local location = {
   'location',
-  color = { bg = colors.bg1, fg = colors.statusline2 },
+  color = palette.location,
   separator = opts.separator,
 }
 
 local progress = {
   'progress',
-  color = { bg = colors.yellow, fg = colors.bg_dim },
+  color = palette.progress,
   separator = opts.separator,
 }
 
 local encoding = {
   'encoding',
-  color = { bg = colors.bg1, fg = colors.statusline2 },
+  color = palette.encoding,
   separator = opts.separator,
 }
 
 local fileformat = {
   'fileformat',
-  color = { bg = colors.orange, fg = colors.bg0 },
+  color = palette.fileformat,
   separator = opts.separator,
 }
 
@@ -79,10 +138,7 @@ local tabs = {
   mode = 2,
   separator = opts.separator,
   section_separators = { left = opts.separator.right, right = opts.separator.left },
-  tabs_color = {
-    active = { bg = colors.blue, fg = colors.bg0 },
-    inactive = { bg = colors.bg2, fg = colors.grey2 }
-  },
+  tabs_color = palette.tabs_color
 }
 
 local function getLspName()
@@ -103,7 +159,7 @@ end
 
 local diagnostics = {
   'diagnostics',
-  color = { bg = colors.bg1, fg = "" },
+  color = palette.diagnostics,
   separator = opts.separator,
   symbols = {
     error = icons.diagnostics.Error .. ' ',
@@ -118,7 +174,7 @@ local lsp = {
     return getLspName()
   end,
   separator = { left = opts.separator.left },
-  color = { bg = colors.red, fg = colors.bg_dim },
+  color = palette.lsp,
 }
 
 
@@ -174,8 +230,8 @@ local config = {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
-    lualine_x = { 'location' },
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
     lualine_z = {}
   },
