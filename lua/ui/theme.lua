@@ -31,18 +31,7 @@ local function load_catppuccin()
   M.theme = 'catppuccin-frappe'
 end
 
-local function load_nord()
-  local lualine_theme = require('lualine.themes.nord')
-  local colors = require('ui.colors').nord
-
-  lualine_theme.normal.c.bg = colors.black
-  M.lualine_theme = lualine_theme
-  M.lualine_preset = 'nord'
-  M.theme = 'nord'
-end
-
 load_everforest()
 -- load_catppuccin()
--- load_nord()
 
 return M

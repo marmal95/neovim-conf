@@ -17,10 +17,16 @@ M.general = {
     ["<ESC>"] = { ":noh<CR>" },
     ["<bar>"] = { ":vsplit<CR>" },
     ["_"] = { ":split<CR>" },
+
     ["<C-k>"] = { ':wincmd k<CR>' },
     ["<C-l>"] = { ':wincmd l<CR>' },
     ["<C-h>"] = { ':wincmd h<CR>' },
     ["<C-j>"] = { ':wincmd j<CR>' },
+
+    ["<C-Right>"] = { ':vertical resize +2<CR>' },
+    ["<C-Left>"] = { ':vertical resize -2<CR>' },
+    ["<C-Up>"] = { ':horizontal resize +2<CR>' },
+    ["<C-Down>"] = { ':horizontal resize -2<CR>' },
 
     ["<C-e>"] = { ':tabnext <CR>' },
     ["<C-q>"] = { ':tabprev <CR>' },
@@ -33,28 +39,34 @@ M.general = {
     ["mm"] = { function()
       pcall(function()
         require('core.work').switch_header_source()
-      end)
+      end, { desc = "Switch C++ header/source file" })
     end }
   }
 }
 
 M.fzf = {
   n = {
-    ["<leader>f"] = { "<cmd> FzfLua files <CR>", "Find files" },
-    ["<leader>r"] = { "<cmd> FzfLua resume <CR>", "Resume find/grep" },
-    ["<leader>b"] = { "<cmd> FzfLua buffers <CR>", "Browse buffers" },
-    ["<leader>g"] = { "<cmd> FzfLua live_grep_glob <CR>", "Grep files" },
-    ["<leader>s"] = { "<cmd> FzfLua grep_cword <CR>", "Grep cursor word" },
+    ["<leader>ff"] = { "<cmd> FzfLua files <CR>", { desc = "Find files" } },
+    ["<leader>fr"] = { "<cmd> FzfLua resume <CR>", { desc = "Resume find/grep" } },
+    ["<leader>fb"] = { "<cmd> FzfLua buffers <CR>", { desc = "Browse buffers" } },
+    ["<leader>fg"] = { "<cmd> FzfLua live_grep_glob <CR>", { desc = "Grep files" } },
+    ["<leader>fs"] = { "<cmd> FzfLua grep_cword <CR>", { desc = "Grep cursor word" } },
+    ["<leader>fcg"] = { function()
+      local default_rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096"
+      local ignore_pattern = "'!test'"
+      local rg_opts = default_rg_opts .. ' -g ' .. ignore_pattern .. ' -e '
+      require('fzf-lua').live_grep({ rg_opts = rg_opts })
+    end, { desc = "Grep files excluding tests" } },
   },
   v = {
-    ["<leader>g"] = { "<cmd> FzfLua grep_visual <CR>", "Grep visual" },
+    ["<leader>fg"] = { "<cmd> FzfLua grep_visual <CR>", { desc = "Grep selection" } },
   }
 }
 
 M.nvim_tree = {
   n = {
-    ["<F1>"] = { ":NvimTreeToggle <CR>", "Find files" },
-    ["<leader>n"] = { ":NvimTreeFindFile<CR>", "Find files" },
+    ["<leader>tt"] = { ":NvimTreeToggle <CR>", { desc = "Toggle file explorer tree" } },
+    ["<leader>tf"] = { ":NvimTreeFindFile<CR>", { desc = "Find current file in file explorer tree" } },
   }
 }
 
@@ -70,8 +82,7 @@ M.gitsigns = {
         end)
         return "<Ignore>"
       end,
-      "Jump to next hunk",
-      opts = { expr = true },
+      { desc = "Jump to next hunk" },
     },
 
     ["[c"] = {
@@ -84,45 +95,44 @@ M.gitsigns = {
         end)
         return "<Ignore>"
       end,
-      "Jump to prev hunk",
-      opts = { expr = true },
+      { desc = "Jump to prev hunk" },
     },
 
     ["<leader>hr"] = {
       function()
         require("gitsigns").reset_hunk()
       end,
-      "Reset hunk",
+      { desc = "Reset hunk" },
     },
 
     ["<leader>hp"] = {
       function()
         require("gitsigns").preview_hunk()
       end,
-      "Preview hunk",
+      { desc = "Preview hunk" },
     },
 
     ["<leader>hb"] = {
       function()
-        package.loaded.gitsigns.blame_line{full = true}
+        package.loaded.gitsigns.blame_line { full = true }
       end,
-      "Blame line",
+      { desc = "Blame line" },
     },
 
     ["<leader>td"] = {
       function()
         require("gitsigns").toggle_deleted()
       end,
-      "Toggle deleted",
+      { desc = "Toggle deleted" },
     },
   },
 }
 
 M.hop = {
   n = {
-    ["<leader><leader>w"] = { "<cmd> HopWord <CR>" },
-    ["<leader><leader>p"] = { "<cmd> HopPattern <CR>" },
-    ["<leader><leader>l"] = { "<cmd> HopLineStart <CR>" },
+    ["<leader>jw"] = { "<cmd> HopWord <CR>", { desc = "Jump to word" } },
+    ["<leader>jp"] = { "<cmd> HopPattern <CR>", { desc = "Jump to pattern" } },
+    ["<leader>jl"] = { "<cmd> HopLineStart <CR>", { desc = "Jump to line" } },
   }
 }
 
@@ -132,128 +142,121 @@ M.lspconfig = {
       function()
         vim.lsp.buf.declaration()
       end,
-      "LSP declaration",
+      { desc = "LSP declaration" },
     },
 
     ["gd"] = {
       function()
         vim.lsp.buf.definition()
       end,
-      "LSP definition",
+      { desc = "LSP definition" },
     },
 
     ["K"] = {
       function()
         vim.lsp.buf.hover()
       end,
-      "LSP hover",
+      { desc = "LSP hover" },
     },
 
     ["gi"] = {
       function()
         vim.lsp.buf.implementation()
       end,
-      "LSP implementation",
+      { desc = "LSP implementation" },
     },
 
-    ["<leader>ls"] = {
-      function()
-        vim.lsp.buf.signature_help()
-      end,
-      "LSP signature help",
-    },
-
-    ["<leader>D"] = {
+    ["gtd"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
-      "LSP definition type",
-    },
-
-    ["<leader>ra"] = {
-      function()
-        require("nvchad.renamer").open()
-      end,
-      "LSP rename",
-    },
-
-    ["<leader>ca"] = {
-      function()
-        vim.lsp.buf.code_action()
-      end,
-      "LSP code action",
+      { desc = "LSP definition type" },
     },
 
     ["gr"] = {
       function()
         vim.lsp.buf.references()
       end,
-      "LSP references",
+      { desc = "LSP references" },
     },
 
     ["<space>e"] = {
       function()
         vim.diagnostic.open_float { border = "rounded" }
       end,
-      "Floating diagnostic",
+      { desc = "Floating diagnostic" },
+    },
+
+    ["<space>ca"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      { desc = "Code action" },
+    },
+
+    ["<space>cf"] = {
+      function()
+        vim.lsp.buf.format()
+      end,
+      { desc = "Code format" },
+    },
+
+    ["<space>h"] = {
+      function()
+        vim.lsp.buf.signature_help()
+      end,
+      { desc = "Code signature help" },
     },
 
     ["[d"] = {
       function()
         vim.diagnostic.goto_prev { float = { border = "rounded" } }
       end,
-      "Goto prev",
+      { desc = "Goto prev" },
     },
 
     ["]d"] = {
       function()
         vim.diagnostic.goto_next { float = { border = "rounded" } }
       end,
-      "Goto next",
+      { desc = "Goto next" },
     },
 
     ["<leader>q"] = {
       function()
         vim.diagnostic.setloclist()
       end,
-      "Diagnostic setloclist",
+      { desc = "Diagnostic setloclist" },
     },
 
     ["<leader>wa"] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
-      "Add workspace folder",
+      { desc = "Add workspace folder" },
     },
 
     ["<leader>wr"] = {
       function()
         vim.lsp.buf.remove_workspace_folder()
       end,
-      "Remove workspace folder",
+      { desc = "Remove workspace folder" },
     },
 
     ["<leader>wl"] = {
       function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end,
-      "List workspace folders",
-    },
-
-    ["<space>f"] = {
-      function()
-        vim.lsp.buf.format()
-      end,
-      "Format code",
+      { desc = "List workspace folders" },
     },
   },
 
   v = {
-    ["<leader>ca"] = {
+    ["<space>ca"] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      "LSP code action",
+      { desc = "LSP code action" },
     },
   },
 }

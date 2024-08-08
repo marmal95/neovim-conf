@@ -1,6 +1,26 @@
 local plugins = {
   -- Navigation
   {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require('plugins.configs.which-key')
+    end,
+    config = function(_, opts)
+      require("which-key").setup(opts)
+    end,
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+
+  {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = "FzfLua",
@@ -74,7 +94,7 @@ local plugins = {
 
   {
     "sontungexpt/stcursorword",
-    event = "VeryLazy",
+    event = { 'BufRead', 'BufNewFile' },
     config = true,
   },
 
@@ -167,7 +187,7 @@ local plugins = {
         background = "medium",
         italics = true,
         -- Hack: Set to unsupported value (-1)
-        -- Prevents setting Transparency and changing colors change by theme on its own
+        -- Prevents setting Transparency and colors change by theme on its own
         transparent_background_level = -1
       })
     end,
@@ -177,11 +197,6 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
-  },
-
-  {
-    "shaunsingh/nord.nvim",
-    lazy = false
   },
 
   {
@@ -197,13 +212,10 @@ local plugins = {
 
   {
     'goolord/alpha-nvim',
-    lazy = false,
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
   },
-
-  {
-    'nvim-tree/nvim-web-devicons'
-  }
 }
 
 return plugins

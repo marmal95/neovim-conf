@@ -39,24 +39,6 @@ local lualine_presets = {
     diagnostics = { bg = colors.catppuccin_frappe.surface0, fg = "" },
     lsp = { bg = colors.catppuccin_frappe.red, fg = colors.catppuccin_frappe.base },
   },
-
-  nord = {
-    space = { bg = theme.normal.c.bg, fg = "" },
-    filename = { bg = colors.nord.off_blue, fg = colors.nord.black },
-    filetype = { bg = colors.nord.dark_gray },
-    branch = { bg = colors.nord.green, fg = colors.nord.black },
-    diff = { bg = colors.nord.dark_gray, fg = "" },
-    location = { bg = colors.nord.dark_gray, fg = colors.nord.darkest_white },
-    progress = { bg = colors.nord.yellow, fg = colors.nord.black },
-    encoding = { bg = colors.nord.dark_gray, fg = colors.nord.darkest_white },
-    fileformat = { bg = colors.nord.orange, fg = colors.nord.black },
-    tabs_color = {
-      active = { bg = colors.nord.off_blue, fg = colors.nord.black },
-      inactive = { bg = colors.nord.dark_gray, fg = colors.nord.glacier }
-    },
-    diagnostics = { bg = colors.nord.dark_gray, fg = "" },
-    lsp = { bg = colors.nord.red, fg = colors.nord.black },
-  }
 }
 
 local palette = lualine_presets[ui_theme.lualine_preset]
